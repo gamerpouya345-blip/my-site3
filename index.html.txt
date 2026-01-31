@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>دسترسی امن و پایدار</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>به پلتفرم دسترسی امن و پایدار خوش آمدید</h1>
+    <p>برای دریافت کانفیگ رایگان و چرخاندن گردونه شانس، ابتدا ثبت‌نام کنید.</p>
+    <a href="register.html" class="btn">ثبت‌نام</a>
+  </div>
+</body>
+</html>

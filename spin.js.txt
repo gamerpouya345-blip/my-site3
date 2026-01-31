@@ -1,0 +1,12 @@
+function spin() {
+  const prizes = [
+    'کانفیگ رایگان ویژه',
+    'یک هدیه ویژه',
+    '۵۰٪ تخفیف خرید بعدی',
+    'دسترسی آزمایشی رایگان',
+    'هدیه شگفت‌انگیز',
+    'جایزه شانس بزرگ'
+  ];
+  const randomIndex = Math.floor(Math.random() * prizes.length);
+  return prizes[randomIndex];
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>داشبورد کاربر</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>داشبورد شما</h2>
+    <div id="welcome"></div>
+    
+    <button id="spinBtn" class="btn">چرخاندن گردونه شانس 🎡</button>
+    
+    <div id="result"></div>
+    
+    <div id="reward" style="margin-top:20px;"></div>
+    
+    <button id="logoutBtn" class="btn">خروج</button>
+  </div>
+
+  <script src="spin.js"></script>
+  <script>
+    const welcome = document.getElementById('welcome');
+    const spinBtn = document.getElementById('spinBtn');
+    const result = document.getElementById('result');
+    const reward = document.getElementById('reward');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // چک ثبت‌نام
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      alert('ابتدا باید ثبت‌نام کنید.');
+      window.location.href = 'register.html';
+    } else {
+      welcome.textContent = `سلام، ${user.username} عزیز!`;
+    }
+
+    spinBtn.addEventListener('click', () => {
+      // جلوگیری از چرخش چندباره
+      if (localStorage.getItem('hasSpun')) {
+        result.textContent = 'شما قبلا گردونه را چرخانده‌اید.';
+        return;
+      }
+      spinBtn.disabled = true;
+      result.textContent = 'در حال چرخش...';
+
+      // چرخش گردونه شانس و نتیجه
+      setTimeout(() => {
+        const prize = spin();
+        result.textContent = `تبریک! شما برنده: ${prize}`;
+        reward.innerHTML = `
+          <p>برای دریافت جایزه، به آیدی تلگرام پیام دهید:</p>
+          <a href="https://t.me/${user.telegramId}" target="_blank">@${user.telegramId}</a>
+        `;
+        localStorage.setItem('hasSpun', 'true');
+      }, 2000);
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      localStorage.clear();
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

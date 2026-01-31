@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ثبت‌نام</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>فرم ثبت‌نام</h2>
+    <form id="registerForm">
+      <label>نام کاربری:</label>
+      <input type="text" id="username" required />
+      
+      <label>ایمیل:</label>
+      <input type="email" id="email" required />
+      
+      <label>آیدی تلگرام (بدون @):</label>
+      <input type="text" id="telegramId" required />
+      
+      <button type="submit" class="btn">ثبت‌نام</button>
+    </form>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('registerForm');
+    const message = document.getElementById('message');
+    
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      
+      // ذخیره موقت تو localStorage (شروع ساده بدون بک‌اند)
+      const user = {
+        username: document.getElementById('username').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        telegramId: document.getElementById('telegramId').value.trim()
+      };
+      
+      if(user.username && user.email && user.telegramId) {
+        localStorage.setItem('user', JSON.stringify(user));
+        message.textContent = 'ثبت‌نام با موفقیت انجام شد. در حال انتقال به داشبورد...';
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 1500);
+      } else {
+        message.textContent = 'لطفا همه فیلدها را پر کنید.';
+      }
+    });
+  </script>
+</body>
+</html>
